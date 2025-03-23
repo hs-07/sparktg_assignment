@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+.ant-layout-sider-trigger {
+  color: black !important;
+  background: white !important;
+}
+.ant-layout {
+  font-family: "Geist", sans-serif !important;
+}
+.ant-menu {
+  font-family: "Geist", sans-serif !important;
+}
