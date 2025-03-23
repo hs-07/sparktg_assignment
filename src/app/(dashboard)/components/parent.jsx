@@ -32,14 +32,14 @@ const Parent = () => {
 
   return (
     <div className="flex gap-4 flex-col md:flex-row w-full pr-4 h-full">
-      <div className="md:w-3/5">
+      <div className="md:w-3/4">
         <MiddlePanel
           data={data}
           onPageChange={onPageChange}
           currentPage={currentPage}
         />
       </div>
-      <div className="md:w-2/5">
+      <div className="md:w-1/4">
         <RightPanel />
       </div>
     </div>
