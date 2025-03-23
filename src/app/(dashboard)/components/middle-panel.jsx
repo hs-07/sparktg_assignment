@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Header, Table, Pagination, Modal } from "@/components/ui";
 
-const MiddlePanel = ({ currentPage, onPageChange, data }) => {
+const MiddlePanel = ({ currentPage, onPageChange, data, setEditData }) => {
   const [isOpen, setOpenModal] = useState(false);
   const [info, setInfo] = useState({});
   return (
@@ -9,7 +9,12 @@ const MiddlePanel = ({ currentPage, onPageChange, data }) => {
       <Header title={"User Contact"} />
 
       <div className="h-full w-full mb-12">
-        <Table data={data} setOpenModal={setOpenModal} setInfo={setInfo} />
+        <Table
+          data={data}
+          setOpenModal={setOpenModal}
+          setInfo={setInfo}
+          setEditData={setEditData}
+        />
       </div>
 
       <div className="absolute bottom-0 fixed shadow-pagination_shadow left-0 py-2 bg-white w-full">

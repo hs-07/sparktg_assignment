@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { LinkOutlined, SearchOutlined, EditOutlined } from "@ant-design/icons";
 
-const Table = ({ data, setOpenModal, setInfo }) => {
+const Table = ({ data, setOpenModal, setInfo, setEditData }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Filter data based on search term
@@ -38,10 +38,29 @@ const Table = ({ data, setOpenModal, setInfo }) => {
     setInfo(info);
     setOpenModal(true);
   };
+  const handleSetEditInfo = (
+    name,
+    type,
+    language,
+    status,
+    genres,
+    officialSite
+  ) => {
+    const info = {
+      name: name,
+      type: type,
+      language: language,
+      status: status,
+      genres: genres,
+      officialSite: officialSite,
+    };
+
+    setEditData(info);
+  };
 
   return (
     <div className="flex flex-col h-full">
-      <div className="overflow-y-hidden h-full relative pb-[180px]">
+      <div className="overflow-y-hidden h-full relative pb-[180px] overflow-x-auto min-w-[900px]">
         {/* HEADINGS */}
         <div className="grid grid-cols-9 place-items-center bg-primary text-white font-[500] p-2 w-full absolute sticky top-0 left-0">
           <div className="">Edit</div>
@@ -77,7 +96,19 @@ const Table = ({ data, setOpenModal, setInfo }) => {
                 className="grid hover:bg-gray-100  grid-cols-9 gap-2 text-gray-500 place-items-center font-[500] p-2 w-full"
                 key={index}
               >
-                <div className="flex gap-2 cursor-pointer hover:text-primary">
+                <div
+                  className="flex gap-2 cursor-pointer hover:text-primary"
+                  onClick={() =>
+                    handleSetEditInfo(
+                      item.name,
+                      item.type,
+                      item.language,
+                      item.status,
+                      item.genres,
+                      item.officialSite
+                    )
+                  }
+                >
                   Edit <EditOutlined />
                 </div>
                 <div className="text-center">{item.name}</div>
