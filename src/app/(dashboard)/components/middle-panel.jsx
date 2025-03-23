@@ -1,13 +1,15 @@
-import React from "react";
-import { Header, Table, Pagination } from "@/components/ui";
+import React, { useState } from "react";
+import { Header, Table, Pagination, Modal } from "@/components/ui";
 
 const MiddlePanel = ({ currentPage, onPageChange, data }) => {
+  const [isOpen, setOpenModal] = useState(false);
+  const [info, setInfo] = useState({});
   return (
     <div className="flex relative flex-col w-full bg-white h-[calc(100vh-3rem)] overflow-y-hidden">
       <Header title={"User Contact"} />
 
       <div className="h-full w-full mb-12">
-        <Table data={data} />
+        <Table data={data} setOpenModal={setOpenModal} setInfo={setInfo} />
       </div>
 
       <div className="absolute bottom-0 fixed shadow-pagination_shadow left-0 py-2 bg-white w-full">
@@ -17,6 +19,8 @@ const MiddlePanel = ({ currentPage, onPageChange, data }) => {
           onPageChange={onPageChange}
         />
       </div>
+
+      <Modal isModalOpen={isOpen} setIsModalOpen={setOpenModal} info={info} />
     </div>
   );
 };

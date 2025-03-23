@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
-import { LinkOutlined, SearchOutlined } from "@ant-design/icons";
+import { LinkOutlined, SearchOutlined, EditOutlined } from "@ant-design/icons";
 
-const Table = ({ data }) => {
+const Table = ({ data, setOpenModal, setInfo }) => {
   const [searchTerm, setSearchTerm] = useState("");
 
   // Filter data based on search term
@@ -26,17 +26,32 @@ const Table = ({ data }) => {
     );
   });
 
+  const handleSetInfo = (name, src, summary, schedule, network) => {
+    const info = {
+      name: name,
+      src: src,
+      summary: summary,
+      schedule: schedule,
+      network: network,
+    };
+
+    setInfo(info);
+    setOpenModal(true);
+  };
+
   return (
     <div className="flex flex-col h-full">
-      <div className="overflow-y-hidden h-full relative pb-32">
+      <div className="overflow-y-hidden h-full relative pb-[180px]">
         {/* HEADINGS */}
-        <div className="grid grid-cols-7 place-items-center bg-primary text-white font-[500] p-2 w-full absolute sticky top-0 left-0">
+        <div className="grid grid-cols-9 place-items-center bg-primary text-white font-[500] p-2 w-full absolute sticky top-0 left-0">
+          <div className="">Edit</div>
           <div className="">Name</div>
           <div className="">Type</div>
           <div className="">Language</div>
           <div className="">Status</div>
           <div className="col-span-2">Genres</div>
           <div className="">Official Site</div>
+          <div className="">Action</div>
         </div>
         {/* Search Bar */}
         <div className="px-4 py-2 bg-gray-50 border-b">
@@ -55,13 +70,16 @@ const Table = ({ data }) => {
         </div>
 
         {/* CONTENT */}
-        <div className="flex flex-col gap-[2px] overflow-y-auto h-full">
+        <div className="flex flex-col gap-[2px] overflow-y-auto h-full divide-y divide-gray-200">
           {filteredData && filteredData.length > 0 ? (
             filteredData.map((item, index) => (
               <div
-                className="grid grid-cols-7 gap-2 text-gray-500 place-items-center font-[500] p-2 w-full"
+                className="grid hover:bg-gray-100  grid-cols-9 gap-2 text-gray-500 place-items-center font-[500] p-2 w-full"
                 key={index}
               >
+                <div className="flex gap-2 cursor-pointer hover:text-primary">
+                  Edit <EditOutlined />
+                </div>
                 <div className="text-center">{item.name}</div>
                 <div className="">{item.type}</div>
                 <div className="">{item.language}</div>
@@ -72,9 +90,24 @@ const Table = ({ data }) => {
                 <div className="">
                   <Link
                     href={item?.officialSite === null ? "" : item.officialSite}
+                    target="_blank"
                   >
                     Link <LinkOutlined />
                   </Link>
+                </div>
+                <div
+                  className="cursor-pointer hover:text-primary"
+                  onClick={() =>
+                    handleSetInfo(
+                      item.name,
+                      item.image.original,
+                      item.summary,
+                      item.schedule,
+                      item.network
+                    )
+                  }
+                >
+                  Show Details
                 </div>
               </div>
             ))

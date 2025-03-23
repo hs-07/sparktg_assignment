@@ -1,32 +1,70 @@
-import React, { useState } from "react";
-import { Button, Modal } from "antd";
-const App = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+import React from "react";
+import { Modal } from "antd";
+import Link from "next/link";
+import { LinkOutlined } from "@ant-design/icons";
+
+const App = ({ isModalOpen, setIsModalOpen, info }) => {
   const handleOk = () => {
     setIsModalOpen(false);
   };
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+
   return (
     <>
-      <Button type="primary" onClick={showModal}>
-        Open Modal
-      </Button>
       <Modal
-        title="Basic Modal"
+        title="More Information"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+        <div className="pt-2">
+          <div className="text-black flex gap-4">
+            <img
+              src={info.src}
+              alt={"show-display"}
+              className="w-24 h-full"
+              width={30}
+              height={30}
+            />
+            <div className="flex flex-col gap-2">
+              <span className="text-2xl font-semibold">{info.name}</span>
+
+              <div className="flex flex-row gap-4">
+                <label className="font-semibold px-2 rounded-full bg-gray-100 text-gray-500 h-fit">
+                  Schedule:
+                </label>
+                <div className="flex flex-col">
+                  <span className="">Time : {info?.schedule?.time}</span>
+                  <span className="">
+                    Days : {info?.schedule?.days.join(", ")}
+                  </span>
+                </div>
+              </div>
+              <div className="flex flex-row gap-4 items-center">
+                <label className="font-semibold px-2 rounded-full bg-gray-100 text-gray-500 h-fit">
+                  Network:
+                </label>
+                <Link
+                  className="flex gap-2"
+                  href={info?.network?.officialSite}
+                  target="_blank"
+                >
+                  {info?.network?.name}
+                  <LinkOutlined />
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div
+            className="mt-2"
+            dangerouslySetInnerHTML={{ __html: info?.summary }}
+          />
+        </div>
       </Modal>
     </>
   );
 };
+
 export default App;
