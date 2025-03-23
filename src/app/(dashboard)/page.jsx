@@ -6,6 +6,7 @@ const { Header, Sider } = Layout;
 
 import { Navbar } from "@/components/ui";
 import { GENERAL_ITEMS } from "@/utils/constants";
+import Parent from "./components/parent";
 
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -37,8 +38,8 @@ const App = () => {
           <span
             className={
               !collapsed
-                ? "flex pl-7 py-2 font-bold text-gray-500 font-[family-name:var(--font-geist-sans)]!"
-                : "flex pl-2 py-2 font-bold text-gray-500 font-[family-name:var(--font-geist-sans)]!"
+                ? "bg-white! flex pl-7 py-2 h-[2.5rem] font-bold text-gray-500 font-[family-name:var(--font-geist-sans)]!"
+                : "bg-white! flex pl-2 py-2 font-bold text-gray-500 font-[family-name:var(--font-geist-sans)]!"
             }
           >
             SETTINGS
@@ -51,7 +52,7 @@ const App = () => {
           />
         </Sider>
         <Layout>
-          <Header className="bg-white! px-4!">User Contact</Header>
+          <Parent />
         </Layout>
       </Layout>
     </div>
