@@ -10,6 +10,9 @@ module.exports = {
       colors: {
         primary: "#1b7fb8",
       },
+      boxShadow: {
+        pagination_shadow: "-1px -3px 10px #8080804d",
+      },
     },
   },
   plugins: [],
