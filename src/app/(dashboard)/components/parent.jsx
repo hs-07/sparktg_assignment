@@ -7,6 +7,7 @@ import RightPanel from "./right-panel";
 const Parent = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [data, setData] = useState([]);
+  const [editData, setEditData] = useState({});
 
   const onPageChange = (page) => {
     if (page >= 0 && page <= 5) {
@@ -37,10 +38,11 @@ const Parent = () => {
           data={data}
           onPageChange={onPageChange}
           currentPage={currentPage}
+          setEditData={setEditData}
         />
       </div>
       <div className="md:w-1/4">
-        <RightPanel />
+        <RightPanel data={editData} setData={setEditData} />
       </div>
     </div>
   );
